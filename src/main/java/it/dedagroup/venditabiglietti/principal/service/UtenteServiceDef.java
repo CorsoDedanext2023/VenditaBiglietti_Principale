@@ -1,7 +1,9 @@
 package it.dedagroup.venditabiglietti.principal.service;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import it.dedagroup.venditabiglietti.principal.dto.request.LoginDTORequest;
 import it.dedagroup.venditabiglietti.principal.dto.request.LoginDTORequest;
 import it.dedagroup.venditabiglietti.principal.model.Ruolo;
 import it.dedagroup.venditabiglietti.principal.model.Utente;
@@ -17,9 +19,9 @@ public interface UtenteServiceDef {
 	Utente modificaUtente(Utente utente);
 	Utente eliminaUtente(long id);
 	Utente findByEmail(String email);
-	Utente login(String email,String password);
 	Utente findById(long id);
 	String disattivaAdmin(long id);
 	//torna il token
 	String login(LoginDTORequest request);
+	List<Utente> findByAllId(List<Long>ids);
 }

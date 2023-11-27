@@ -26,7 +26,6 @@ public class VenditoreFacade implements GeneralCallService{
     private final ManifestazioneServiceDef manifestazioneServiceDef;
     private final CategoriaServiceDef categoriaServiceDef;
     private final EventoServiceDef eventoServiceDef;
-
     private final BigliettiMapper bigliettiMapper;
     private final ManifestazioneMapper manifestazioneMapper;
     private final EventoMapper eventoMapper;
@@ -39,6 +38,7 @@ public class VenditoreFacade implements GeneralCallService{
     public final String PREZZO_SETTORE_EVENTO_PATH = "http://localhost:8086/prezzoSettoreEvento";
 
     public final String LUOGO_PATH = "http://localhost:8088/biglietto";
+    /*
 
     public ManifestazioneDTOResponse addManifestazione(AddManifestazioneDTORequest request, Utente u){
         if (!u.getRuolo().equals(Ruolo.VENDITORE))throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Errore l'utente non ha i permessi");
@@ -168,4 +168,7 @@ public class VenditoreFacade implements GeneralCallService{
         PrezzoSettoreEventoMicroDTO pseDTOmodificato = callPost(PREZZO_SETTORE_EVENTO_PATH+"/find/id"+pseDTO.getId(),null, PrezzoSettoreEventoMicroDTO.class);
         return prezzoSettoreEventoMapper.toPseDTOResponse(pseDTOmodificato,eventoDTO.getDescrizione(),settoreDTO.getNome());
     }
+
+     */
 }
+

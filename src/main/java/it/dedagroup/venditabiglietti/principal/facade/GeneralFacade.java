@@ -1,8 +1,11 @@
 package it.dedagroup.venditabiglietti.principal.facade;
 
 import it.dedagroup.venditabiglietti.principal.dto.request.AggiungiUtenteDTORequest;
+import it.dedagroup.venditabiglietti.principal.dto.request.EventiFiltratiDTORequest;
 import it.dedagroup.venditabiglietti.principal.dto.request.LoginDTORequest;
 import it.dedagroup.venditabiglietti.principal.dto.response.*;
+import it.dedagroup.venditabiglietti.principal.dto.response.EventiFiltratiDTOResponse;
+import it.dedagroup.venditabiglietti.principal.dto.response.EventoDTOResponse;
 import it.dedagroup.venditabiglietti.principal.mapper.EventoMapper;
 import it.dedagroup.venditabiglietti.principal.mapper.UtenteMapper;
 import it.dedagroup.venditabiglietti.principal.model.*;
@@ -41,6 +44,9 @@ public class GeneralFacade implements GeneralCallService{
     SettoreServiceDef settServ;
 
     private final String pathEvento="http://localhost:8081/evento";
+    private final String pathLuogo = "http://localhost:8088/luogo";
+    private final String pathCategoria = "http://localhost:8082/categoria";
+    private final String pathManifestazione = "http://localhost:8084/manifestazione";
 
     public void registrazioneCliente(AggiungiUtenteDTORequest req){
         Utente uNew =uMap.toUtenteCliente(req);
@@ -70,6 +76,30 @@ public class GeneralFacade implements GeneralCallService{
     }
     public String login(LoginDTORequest request){
         return uServ.login(request);
+    }
+
+    public Utente findByEmail(String email){
+        Utente u = uServ.findByEmail(email);
+        if(u == null){
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Nessun utente con email " + email);
+        }
+        return u;
+    }
+
+    public Utente findById(long id){
+        return uServ.findById(id);
+    }
+    public List<Utente> findByAllId(List<Long>ids){
+        return uServ.findByAllId(ids);
+    }
+
+    public List<EventiFiltratiDTOResponse> eventiFiltrati(EventiFiltratiDTORequest request) {
+        List<Evento> eventiCriteria = callGetForList(pathEvento + "/filtraEventi", request.getRequestEventi(), Evento[].class);
+        List<Luogo> luoghiCriteria = callGetForList(pathLuogo + "/filtroLuogo", request.getRequestLuoghi(), Luogo[].class);
+        List<Categoria> categorieCriteria = callGetForList(pathCategoria + "/filtraCategorie", request.getNomeCategoria(), Categoria[].class);
+        List<Manifestazione> manifestazioneCriteria = callGetForList(pathManifestazione + "/filtraManifestazioni", request.getNomeManifestazione(), Manifestazione[].class);
+
+        return evMap.toListOfEventiFiltratiDTOResponse(eventiCriteria, luoghiCriteria, categorieCriteria, manifestazioneCriteria);
     }
 
 }

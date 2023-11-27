@@ -37,6 +37,7 @@ public class VenditoreController {
 
 	@Autowired
 	VenditoreFacade vendFac;
+
 	@Operation(summary = "Metodo per aggiungere una manifestazione",description = "Questo EndPoint permette al venditore di aggiungere una manifestazione")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "La manifestazione e' stata inserita con successo nel sistema", content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ManifestazioneDTOResponse.class))),
@@ -158,5 +159,7 @@ public class VenditoreController {
 	public ResponseEntity<PseDTOResponse> setPrezzoSettoreEvento(@RequestBody @Valid PrezzoSettoreEventoDTORequest request, UsernamePasswordAuthenticationToken upat) {
 		return ResponseEntity.ok(vendFac.setPrezzoSettoreEvento(request, ((Utente)upat.getPrincipal())));
 	}
+
+	 */
 
 }

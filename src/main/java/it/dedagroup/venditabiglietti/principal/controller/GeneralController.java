@@ -7,14 +7,13 @@ import static it.dedagroup.venditabiglietti.principal.util.UtilPath.REGISTRAZION
 import java.util.List;
 
 import it.dedagroup.venditabiglietti.principal.dto.response.MostraEventiFuturiDTOResponse;
+import it.dedagroup.venditabiglietti.principal.dto.request.EventiFiltratiDTORequest;
+import it.dedagroup.venditabiglietti.principal.dto.response.EventiFiltratiDTOResponse;
+import it.dedagroup.venditabiglietti.principal.model.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import it.dedagroup.venditabiglietti.principal.dto.request.AggiungiUtenteDTORequest;
 import it.dedagroup.venditabiglietti.principal.dto.request.LoginDTORequest;
@@ -31,7 +30,7 @@ import java.util.List;
 import static it.dedagroup.venditabiglietti.principal.util.UtilPath.*;
 
 @RestController
-@RequestMapping("/all")
+@RequestMapping(GENERAL_PATH)
 public class GeneralController {
 
     @Autowired
@@ -54,5 +53,8 @@ public class GeneralController {
         return ResponseEntity.status(HttpStatus.ACCEPTED).header("Authorization",gFac.login(request)).build();
     }
 
-
+    @GetMapping("/testCriteria")
+    public ResponseEntity<List<EventiFiltratiDTOResponse>> criteria(@RequestBody EventiFiltratiDTORequest request){
+        return ResponseEntity.accepted().body(gFac.eventiFiltrati(request));
+    }
 }

@@ -5,9 +5,12 @@ import it.dedagroup.venditabiglietti.principal.model.Evento;
 import it.dedagroup.venditabiglietti.principal.model.Luogo;
 import it.dedagroup.venditabiglietti.principal.model.Manifestazione;
 import it.dedagroup.venditabiglietti.principal.model.PrezzoSettoreEvento;
+import it.dedagroup.venditabiglietti.principal.dto.response.*;
+import it.dedagroup.venditabiglietti.principal.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -76,5 +79,30 @@ public class EventoMapper {
         response.setDataEvento(evento.getData());
         response.setOrarioEvento(evento.getOra());
         return response;
+    }
+
+    public EventiFiltratiDTOResponse toEventiFiltratiDTOResponse(Evento e, Luogo l, Categoria c, Manifestazione m){
+        EventiFiltratiDTOResponse response = new EventiFiltratiDTOResponse();
+        response.setDataEvento(e.getData());
+        response.setOraEvento(e.getOra());
+        response.setDescrizioneEvento(e.getDescrizione());
+        response.setComune(l.getComune());
+        response.setProvincia(l.getProvincia());
+        response.setNomeCategoria(c.getNome());
+        response.setNomeManifestazione(m.getNome());
+        return response;
+    }
+
+    public List<EventiFiltratiDTOResponse> toListOfEventiFiltratiDTOResponse(List<Evento> eventoList, List<Luogo> luogoList,
+                                                                             List<Categoria> categoriaList, List<Manifestazione> manifestazioneList){
+        List<EventiFiltratiDTOResponse> responseList = new ArrayList<>();
+        for(int i = 0; i < eventoList.size(); i++){
+            EventiFiltratiDTOResponse dtoResponse = new EventiFiltratiDTOResponse();
+            dtoResponse.setDescrizioneEvento(eventoList.get(i).getDescrizione());
+            dtoResponse.setDataEvento(eventoList.get(i).getData());
+            dtoResponse.setOraEvento(eventoList.get(i).getOra());
+            responseList.add(dtoResponse);
+        }
+        return responseList;
     }
 }
