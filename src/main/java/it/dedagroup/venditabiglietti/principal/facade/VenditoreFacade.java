@@ -1,20 +1,51 @@
 package it.dedagroup.venditabiglietti.principal.facade;
 
-import it.dedagroup.venditabiglietti.principal.dto.request.*;
-import it.dedagroup.venditabiglietti.principal.dto.response.*;
-import it.dedagroup.venditabiglietti.principal.mapper.*;
-import it.dedagroup.venditabiglietti.principal.model.*;
-import it.dedagroup.venditabiglietti.principal.service.*;
-import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
-import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
+import it.dedagroup.venditabiglietti.principal.dto.request.AddEventoDTORequest;
+import it.dedagroup.venditabiglietti.principal.dto.request.AddManifestazioneDTORequest;
+import it.dedagroup.venditabiglietti.principal.dto.request.ModifyPSEDTORequest;
+import it.dedagroup.venditabiglietti.principal.dto.response.AddEventoResponse;
+import it.dedagroup.venditabiglietti.principal.dto.response.BigliettoMicroDTO;
+import it.dedagroup.venditabiglietti.principal.dto.response.CategoriaMicroDTO;
+import it.dedagroup.venditabiglietti.principal.dto.response.DatiEventiDTOResponse;
+import it.dedagroup.venditabiglietti.principal.dto.response.EventoMicroDTO;
+import it.dedagroup.venditabiglietti.principal.dto.response.LuogoMicroDTO;
+import it.dedagroup.venditabiglietti.principal.dto.response.ManifestazioneMicroDTO;
+import it.dedagroup.venditabiglietti.principal.dto.response.PrezzoSettoreEventoMicroDTO;
+import it.dedagroup.venditabiglietti.principal.dto.response.PseDTOResponse;
+import it.dedagroup.venditabiglietti.principal.dto.response.SettoreMicroDTO;
+import it.dedagroup.venditabiglietti.principal.dto.response.SettoriPerSingoloLuogo;
+import it.dedagroup.venditabiglietti.principal.dto.response.StatisticheManifestazioneDTOResponse;
+import it.dedagroup.venditabiglietti.principal.dto.response.VisualizzaEventoManifestazioneDTOResponse;
+import it.dedagroup.venditabiglietti.principal.mapper.BigliettiMapper;
+import it.dedagroup.venditabiglietti.principal.mapper.EventoMapper;
+import it.dedagroup.venditabiglietti.principal.mapper.LuogoMapper;
+import it.dedagroup.venditabiglietti.principal.mapper.ManifestazioneMapper;
+import it.dedagroup.venditabiglietti.principal.mapper.PrezzoSettoreEventoMapper;
+import it.dedagroup.venditabiglietti.principal.model.Biglietto;
+import it.dedagroup.venditabiglietti.principal.model.Evento;
+import it.dedagroup.venditabiglietti.principal.model.Luogo;
+import it.dedagroup.venditabiglietti.principal.model.Manifestazione;
+import it.dedagroup.venditabiglietti.principal.model.PrezzoSettoreEvento;
+import it.dedagroup.venditabiglietti.principal.model.Ruolo;
+import it.dedagroup.venditabiglietti.principal.model.Settore;
+import it.dedagroup.venditabiglietti.principal.model.Utente;
+import it.dedagroup.venditabiglietti.principal.service.BigliettoServiceDef;
+import it.dedagroup.venditabiglietti.principal.service.CategoriaServiceDef;
+import it.dedagroup.venditabiglietti.principal.service.EventoServiceDef;
+import it.dedagroup.venditabiglietti.principal.service.GeneralCallService;
+import it.dedagroup.venditabiglietti.principal.service.LuogoServiceDef;
+import it.dedagroup.venditabiglietti.principal.service.ManifestazioneServiceDef;
+import it.dedagroup.venditabiglietti.principal.service.PrezzoSettoreEventoServiceDef;
+import it.dedagroup.venditabiglietti.principal.service.SettoreServiceDef;
+import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
@@ -34,6 +65,8 @@ public class VenditoreFacade implements GeneralCallService{
     private final EventoMapper eventoMapper;
     private final LuogoMapper luogoMapper;
     private final PrezzoSettoreEventoMapper prezzoSettoreEventoMapper;
+
+    
 
     public String addManifestazione(AddManifestazioneDTORequest request, Utente u){
         if (!u.getRuolo().equals(Ruolo.VENDITORE))throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Errore l'utente non ha i permessi");
@@ -179,6 +212,8 @@ public class VenditoreFacade implements GeneralCallService{
 
         PrezzoSettoreEventoMicroDTO pseDTOmodificato = prezzoSettoreEventoServiceDef.findPSEById(pseDTO.getId());
         return prezzoSettoreEventoMapper.toPseDTOResponse(pseDTOmodificato,eventoDTO.getDescrizione(),settoreDTO.getNome());
-    }   
+    }
+
+     
 }
 
