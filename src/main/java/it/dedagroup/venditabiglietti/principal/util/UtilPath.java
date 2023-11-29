@@ -19,6 +19,7 @@ public class UtilPath {
 	public static final String ELIMINA_LUOGO = "/luogo/elimina";
 	public static final String ELIMINA_MANIFESTAZIONE ="/elimina-manifestazione";
 	public static final String ELIMINA_EVENTO="/elimina-evento";
+	public static final String AGGIUNGI_LUOGO="/luogo/aggiungi";
 
 
 	//-------------------------------------------GENERAL------------------------------------------------------/
