@@ -38,7 +38,7 @@ public class VenditoreFacade implements GeneralCallService{
     public final String PREZZO_SETTORE_EVENTO_PATH = "http://localhost:8086/prezzoSettoreEvento";
 
     public final String LUOGO_PATH = "http://localhost:8088/biglietto";
-    /*
+    
 
     public ManifestazioneDTOResponse addManifestazione(AddManifestazioneDTORequest request, Utente u){
         if (!u.getRuolo().equals(Ruolo.VENDITORE))throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Errore l'utente non ha i permessi");
@@ -169,6 +169,6 @@ public class VenditoreFacade implements GeneralCallService{
         return prezzoSettoreEventoMapper.toPseDTOResponse(pseDTOmodificato,eventoDTO.getDescrizione(),settoreDTO.getNome());
     }
 
-     */
+     
 }
 
