@@ -23,6 +23,9 @@ public class UtenteServiceImpl implements UtenteServiceDef, GeneralCallService {
 
 	private final String pathUtente="http://localhost:8092/utente";
 
+	@Autowired
+	private UtenteRepository utenteRepository;
+
 	//TODO pulire i metodi togliendo le duplicazioni
 
 

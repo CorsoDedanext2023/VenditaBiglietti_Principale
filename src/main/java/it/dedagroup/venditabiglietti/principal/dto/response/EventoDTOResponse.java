@@ -7,7 +7,6 @@ import java.time.LocalTime;
 import java.util.List;
 @Data
 public class EventoDTOResponse {
-	
 	private long id;
 	private LocalDate data;
 	private LocalTime ora;

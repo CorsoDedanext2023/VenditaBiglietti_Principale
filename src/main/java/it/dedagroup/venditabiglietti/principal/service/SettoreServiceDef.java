@@ -10,5 +10,7 @@ public interface SettoreServiceDef {
 	
 	void aggiungiSettore(AggiungiSettoreDtoRequest dto);
 	List<SettoreMicroDTO> findAllByIdLuogo(long idLuogo);
+	List<SettoreMicroDTO> findAllByListIdsLuogo(List<Long> ids);
 
+	SettoreMicroDTO findById(long idSettore);
 }

@@ -15,14 +15,14 @@ public class PrezzoSettoreEventoMapper {
     public PrezzoSettoreEvento toPrezzoSettoreEvento(PrezzoSettoreEventoMicroDTO pseDTO, Evento e, Settore s){
         PrezzoSettoreEvento pse = new PrezzoSettoreEvento();
         pse.setId(pseDTO.getId());
-        pse.setEvento(e);
-        e.addPrezzoSettoreEvento(pse);
-        pse.setSettore(s);
-        s.addPrezzoSettoreEvento(pse);
-        pse.setPrezzo(pse.getPrezzo());
-        pse.setCancellato(pse.isCancellato());
+        pse.setPrezzo(pseDTO.getPrezzo());
+        pse.setCancellato(pseDTO.isCancellato());
         pse.setBiglietti(new ArrayList<>());
-        pse.setVersion(pse.getVersion());
+        pse.setVersion(pseDTO.getVersion());
+        if(e!=null) pse.setEvento(e);
+        if(pse!=null) e.addPrezzoSettoreEvento(pse);
+        if(s!=null) pse.setSettore(s);
+        if(s!=null) s.addPrezzoSettoreEvento(pse);
         return pse;
     }
 

@@ -13,4 +13,5 @@ public class PrezzoSettoreEventoMicroDTO {
     private long idEvento;
     private double prezzo;
     private boolean isCancellato;
+    private long version;
 }

@@ -31,22 +31,12 @@ class VenditaBigliettiPrincipalApplicationTests implements GeneralCallService{
 
 	@Autowired
 	MockMvc mvc;
-		
-//	@Test
-//	@Order(1)
-//	public void testAddEventoSenzaDati() throws Exception{
-//		mvc.perform(MockMvcRequestBuilders.post("/venditore/evento/add")
-//				.contentType(MediaType.APPLICATION_JSON)
-//				.accept(MediaType.APPLICATION_JSON))
-//				.andExpect(MockMvcResultMatchers.status().is4xxClientError())
-//				.andDo(print());
-//	}
-	
+
 	@Test
 	@Order(2)
 	public void testAddEventoConDati() throws Exception{
 		//TODO capire perchè c'è uno username
-		String json = convertToJson(new AddEventoDTORequest(LocalDate.now(),LocalTime.now(),"Concerto Gemitaiz",1,1));
+		String json = convertToJson(new AddEventoDTORequest(LocalDate.now().toString(),LocalTime.now().toString(),"Concerto Gemitaiz",1,1));
 		mvc.perform(MockMvcRequestBuilders.post("/venditore/evento/add")
 				//la richiesta all'interno del body è un JSON
 				.contentType(MediaType.APPLICATION_JSON)
@@ -56,7 +46,7 @@ class VenditaBigliettiPrincipalApplicationTests implements GeneralCallService{
 		 .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
 		 .andReturn();
 	}
-	
+
 	@Test
 	@Order(3)
 	public void testDelete() throws Exception{
@@ -66,10 +56,4 @@ class VenditaBigliettiPrincipalApplicationTests implements GeneralCallService{
 		.andExpect(MockMvcResultMatchers.status().is4xxClientError())
 		.andDo(print());
 	}
-	
-//	@Test
-//	@Order(4)
-//	public void testVisualizzaEventiOrganizzati() throws Exception{
-//		
-//	}
 }

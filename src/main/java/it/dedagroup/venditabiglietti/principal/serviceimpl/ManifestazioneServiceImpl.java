@@ -20,20 +20,20 @@ public class ManifestazioneServiceImpl implements ManifestazioneServiceDef, Gene
 
 	@Override
 	public ManifestazioneMicroDTO findById(long idManifestazione) {
-		String mioPath=pathManifestazione+"manifestazione/find/"+idManifestazione;
+		String mioPath=pathManifestazione+"manifestazione/find-id/"+idManifestazione;
 		return callGet(mioPath,idManifestazione,ManifestazioneMicroDTO.class);
 	}
 
 	@Override
 	public ManifestazioneMicroDTO findByNome(String nome) {
-		String path = pathManifestazione+"manifestazione/find/"+nome;
+		String path = pathManifestazione+"manifestazione/find-name/"+nome+"/cancellato=false";
 		return callGet(path, nome, ManifestazioneMicroDTO.class);
 	}
 
 	@Override
-	public ManifestazioneMicroDTO save(AddManifestazioneDTORequest request) {
-		String path = pathManifestazione+"manifestazione/new/"+request.getNome();
-		return callPost(path, request.getNome(),ManifestazioneMicroDTO.class);
+	public String save(AddManifestazioneDTORequest request) {
+		String path = pathManifestazione+"manifestazione/new";
+		return callPost(path, request,String.class);
 	}
 
 

@@ -20,7 +20,7 @@ public class CategoriaServiceImpl implements CategoriaServiceDef, GeneralCallSer
 
 	@Override
 	public CategoriaMicroDTO findById(long id) {
-		String path = "http://localhost:8082/categoria/aggiungicategoria";
+		String path = "http://localhost:8082/categoria/trova/"+id;
 		return callGet(path, id, CategoriaMicroDTO.class);
 	}
 

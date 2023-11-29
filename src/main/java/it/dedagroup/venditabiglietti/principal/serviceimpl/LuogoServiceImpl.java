@@ -1,5 +1,4 @@
 package it.dedagroup.venditabiglietti.principal.serviceimpl;
-
 import it.dedagroup.venditabiglietti.principal.dto.response.LuogoMicroDTO;
 import it.dedagroup.venditabiglietti.principal.model.Luogo;
 import it.dedagroup.venditabiglietti.principal.service.GeneralCallService;
@@ -43,7 +42,7 @@ public class LuogoServiceImpl implements LuogoServiceDef, GeneralCallService {
 
     @Override
     public List<LuogoMicroDTO> findAllByIds(List<Long> ids) {
-        return callGetForList(pathLuogo+"find/allByIds", ids, LuogoMicroDTO[].class);
+        return callPostForList(pathLuogo+"find/allByIds", ids, LuogoMicroDTO[].class);
     }
 
     @Override
@@ -95,6 +94,10 @@ public class LuogoServiceImpl implements LuogoServiceDef, GeneralCallService {
     public List<LuogoMicroDTO> findAllLuogoByNazionalitaAndComune(String nazionalita, String comune) {
         return callGetForList(pathLuogo+"find/all/nazionalita&comune/"+nazionalita+"/"+comune,null,LuogoMicroDTO[].class);
     }
+	@Override
+	public List<LuogoMicroDTO> filtraLuoghiMap(Map<String, String> mapLuogo) {
+		return callPostForList(pathLuogo+"filtroLuogoMap", mapLuogo, LuogoMicroDTO[].class);
+	}
 
 
 }

@@ -7,9 +7,11 @@ import java.util.List;
 import java.util.Map;
 
 public interface LuogoServiceDef {
-    List<LuogoMicroDTO> findByCriteriaQuery(Map<String, String> parametriLuogo);
-
-    public LuogoMicroDTO save(Luogo luogo);
+	
+	List<LuogoMicroDTO> findByCriteriaQuery(Map<String, String> parametriLuogo);
+    
+	List<LuogoMicroDTO> filtraLuoghiMap(Map<String, String> mapLuogo);
+	public LuogoMicroDTO save(Luogo luogo);
     public LuogoMicroDTO modify(Luogo luogo);
     public void deleteLuogoById(long id);
     public List<LuogoMicroDTO> findAll();

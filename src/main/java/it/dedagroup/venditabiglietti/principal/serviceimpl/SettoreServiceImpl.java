@@ -22,8 +22,18 @@ public class SettoreServiceImpl implements SettoreServiceDef, GeneralCallService
 
 	@Override
 	public List<SettoreMicroDTO> findAllByIdLuogo(long idLuogo) {
-		String mioPath=path+"/findByIdLuogo/"+idLuogo;
+		String mioPath=path+"/findByIdLuogo?idLuogo="+idLuogo;
 		return callGetForList(mioPath,idLuogo,SettoreMicroDTO[].class);
+	}
+
+	@Override
+	public List<SettoreMicroDTO> findAllByListIdsLuogo(List<Long> ids) {
+		return callPostForList(path+"/findAllByListIdLuogo",ids,SettoreMicroDTO[].class);
+	}
+
+	@Override
+	public SettoreMicroDTO findById(long idSettore) {
+		return callGet(path+"/findByIdEsistenti?id="+idSettore,idSettore,SettoreMicroDTO.class);
 	}
 
 

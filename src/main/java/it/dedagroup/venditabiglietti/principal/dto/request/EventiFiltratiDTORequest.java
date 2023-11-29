@@ -6,8 +6,8 @@ import java.time.LocalDate;
 
 @Data
 public class EventiFiltratiDTORequest {
-    String nomeCategoria;
-    String nomeManifestazione;
+    CategoriaCriteriaDTORequest requestCategoria;
+    ManifestazioneCriteriaDTORequest requestManifestazione;
     EventiCriteriaDTORequest requestEventi;
     LuogoCriteriaEventiDTORequest requestLuoghi;
 }
