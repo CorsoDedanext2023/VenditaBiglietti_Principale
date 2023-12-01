@@ -109,7 +109,6 @@ public class AdminController {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "202", description = "Il settore è stato aggiunto con successo"),
 			@ApiResponse(responseCode = "400", description = "La richiesta del client non è valida. Assicurarsi che i dati di input siano corretti.", content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ErrorMessageDTOResponse.class))) })
-
 	@PostMapping(AGGIUNGI_SETTORE)
 	public ResponseEntity<Void> aggiungiSettore(@Valid @RequestBody AggiungiSettoreDtoRequest request) {
 		facade.aggiungiSettore(request);
