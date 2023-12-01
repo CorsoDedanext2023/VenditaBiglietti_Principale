@@ -3,6 +3,7 @@ package it.dedagroup.venditabiglietti.principal.serviceimpl;
 
 import java.util.List;
 
+import it.dedagroup.venditabiglietti.principal.dto.request.EventiCriteriaDTORequest;
 import it.dedagroup.venditabiglietti.principal.dto.response.EventoMicroDTO;
 import it.dedagroup.venditabiglietti.principal.dto.request.AddEventoDTORequest;
 import it.dedagroup.venditabiglietti.principal.dto.request.EventiFiltratiDTORequest;
@@ -54,7 +55,10 @@ private String servicePath="http://localhost:8081/evento/";
 	public void deleteEvento(long idEvento) {
 		callPost(servicePath+"/cancella/"+idEvento, null, EventoMicroDTO.class);
 	}
-    
-    
+
+    @Override
+    public List<EventoMicroDTO> criteriaEventiFiltrati(EventiCriteriaDTORequest request) {
+        return callPostForList(servicePath + "filtraEventi", request, EventoMicroDTO[].class);
+    }
 
 }

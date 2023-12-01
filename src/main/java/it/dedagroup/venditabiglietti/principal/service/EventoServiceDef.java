@@ -2,6 +2,7 @@ package it.dedagroup.venditabiglietti.principal.service;
 
 import java.util.List;
 
+import it.dedagroup.venditabiglietti.principal.dto.request.EventiCriteriaDTORequest;
 import it.dedagroup.venditabiglietti.principal.dto.response.EventoMicroDTO;
 import it.dedagroup.venditabiglietti.principal.dto.request.AddEventoDTORequest;
 import it.dedagroup.venditabiglietti.principal.dto.request.EventiFiltratiDTORequest;
@@ -21,4 +22,5 @@ public interface EventoServiceDef {
     public EventoMicroDTO findById(long idEvento);
 
     public EventoMicroDTO findByDescrizione(String descrizione);
+    public List<EventoMicroDTO> criteriaEventiFiltrati(EventiCriteriaDTORequest request);
 }

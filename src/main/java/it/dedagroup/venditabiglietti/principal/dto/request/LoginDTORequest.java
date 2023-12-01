@@ -22,8 +22,4 @@ public class LoginDTORequest {
     @Pattern(regexp = "^(?=.*[A-Z]).*$", message = "La password deve contenere almeno una lettera maiuscola")
     private String password;
 
-
-    public Boolean isRequestNull(){
-        return this.email == null && this.password == null || this.email.isBlank() || this.password.isBlank();
-    }
 }

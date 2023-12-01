@@ -27,6 +27,6 @@ public class UtilPath {
 	public static final String REGISTRAZIONE = "/registrazioneCliente";
 	public static final String LOGIN = "/login";
 	public static final String EVENTI_FUTURI_CON_BIGLIETTI = "/trovaEventiFuturiConBiglietti";
-	public static final String FILTRA_EVENTI = "/filtraEventi";
+	public static final String FILTRA_EVENTI_CON_BIGLIETTI = "/filtraEventiConBiglietti";
 
 }

@@ -1,11 +1,15 @@
 package it.dedagroup.venditabiglietti.principal.serviceimpl;
 
 import it.dedagroup.venditabiglietti.principal.dto.request.AddManifestazioneDTORequest;
+import it.dedagroup.venditabiglietti.principal.dto.request.EventiFiltratiDTORequest;
+import it.dedagroup.venditabiglietti.principal.dto.request.ManifestazioneCriteriaDTORequest;
 import it.dedagroup.venditabiglietti.principal.dto.response.ManifestazioneMicroDTO;
 import org.springframework.stereotype.Service;
 
 import it.dedagroup.venditabiglietti.principal.service.GeneralCallService;
 import it.dedagroup.venditabiglietti.principal.service.ManifestazioneServiceDef;
+
+import java.util.List;
 
 @Service
 public class ManifestazioneServiceImpl implements ManifestazioneServiceDef, GeneralCallService{
@@ -34,6 +38,11 @@ public class ManifestazioneServiceImpl implements ManifestazioneServiceDef, Gene
 	public String save(AddManifestazioneDTORequest request) {
 		String path = pathManifestazione+"manifestazione/new";
 		return callPost(path, request,String.class);
+	}
+
+	@Override
+	public List<ManifestazioneMicroDTO> criteriaManifestazioniFiltrate(ManifestazioneCriteriaDTORequest request) {
+		return callPostForList(pathManifestazione + "manifestazione/filtraManifestazioni", request, ManifestazioneMicroDTO[].class);
 	}
 
 

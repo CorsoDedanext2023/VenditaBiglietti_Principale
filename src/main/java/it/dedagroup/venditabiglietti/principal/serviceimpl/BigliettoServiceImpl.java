@@ -72,7 +72,7 @@ public class BigliettoServiceImpl implements BigliettoServiceDef, GeneralCallSer
 
     @Override
     public int countByIdPrezzoSettoreEventoAndDataAcquistoIsNotNull(long id_prezzoSettoreEvento) {
-        return callPost(BIGLIETTO_PATH+"/count/data-acquisto/not-null/prezzo-settore-evento/id/"+id_prezzoSettoreEvento,null,Integer.class);
+        return callPost(BIGLIETTO_PATH+"/count/all/prezzo-settore-evento/id/data-acquisto/not-null/"+id_prezzoSettoreEvento,null,Integer.class);
     }
 
     @Override

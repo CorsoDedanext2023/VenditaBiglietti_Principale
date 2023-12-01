@@ -1,5 +1,7 @@
 package it.dedagroup.venditabiglietti.principal.service;
 
+import it.dedagroup.venditabiglietti.principal.dto.request.EventiFiltratiDTORequest;
+import it.dedagroup.venditabiglietti.principal.dto.request.LuogoCriteriaEventiDTORequest;
 import it.dedagroup.venditabiglietti.principal.dto.response.LuogoMicroDTO;
 import it.dedagroup.venditabiglietti.principal.model.Luogo;
 
@@ -26,4 +28,5 @@ public interface LuogoServiceDef {
     public List<LuogoMicroDTO> findAllLuogoByProvincia(String provincia);
     public List<LuogoMicroDTO> findAllLuogoByNazionalita(String nazionalita);
     public List<LuogoMicroDTO> findAllLuogoByNazionalitaAndComune(String nazionalita, String comune);
+    public List<LuogoMicroDTO> criteriaLuoghiFiltrati(LuogoCriteriaEventiDTORequest request);
 }

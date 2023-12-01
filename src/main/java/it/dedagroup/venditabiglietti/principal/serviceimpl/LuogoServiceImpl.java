@@ -1,4 +1,6 @@
 package it.dedagroup.venditabiglietti.principal.serviceimpl;
+import it.dedagroup.venditabiglietti.principal.dto.request.EventiFiltratiDTORequest;
+import it.dedagroup.venditabiglietti.principal.dto.request.LuogoCriteriaEventiDTORequest;
 import it.dedagroup.venditabiglietti.principal.dto.response.LuogoMicroDTO;
 import it.dedagroup.venditabiglietti.principal.model.Luogo;
 import it.dedagroup.venditabiglietti.principal.service.GeneralCallService;
@@ -94,10 +96,15 @@ public class LuogoServiceImpl implements LuogoServiceDef, GeneralCallService {
     public List<LuogoMicroDTO> findAllLuogoByNazionalitaAndComune(String nazionalita, String comune) {
         return callGetForList(pathLuogo+"find/all/nazionalita&comune/"+nazionalita+"/"+comune,null,LuogoMicroDTO[].class);
     }
-	@Override
+
+    @Override
 	public List<LuogoMicroDTO> filtraLuoghiMap(Map<String, String> mapLuogo) {
 		return callPostForList(pathLuogo+"filtroLuogoMap", mapLuogo, LuogoMicroDTO[].class);
 	}
 
+    @Override
+    public List<LuogoMicroDTO> criteriaLuoghiFiltrati(LuogoCriteriaEventiDTORequest request) {
+        return callPostForList(pathLuogo + "/filtroLuogo", request, LuogoMicroDTO[].class);
+    }
 
 }
