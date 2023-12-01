@@ -27,6 +27,19 @@ public class LuogoMapper {
         luogo.setVersion(l.getVersion());
         return luogo;
     }
+    
+    public Luogo toLuogo(LuogoMicroDTO l) {
+    	Luogo luogo = new Luogo();
+        luogo.setId(l.getId());
+        luogo.setRiga1(l.getRiga1());
+        luogo.setRiga2(l.getRiga2());
+        luogo.setProvincia(l.getProvincia());
+        luogo.setCap(l.getCap());
+        luogo.setComune(l.getComune());
+        luogo.setNazionalita(l.getNazionalita());
+        luogo.setCancellato(l.isCancellato());
+        return luogo;
+    }
 
     public List<Luogo> toLuogoList(List<LuogoMicroDTO> listLuoghi,List<SettoreMicroDTO> settori){
         return listLuoghi.stream().map(l->this.toLuogo(l,settori.stream().filter(s->s.getIdLuogo()==l.getId()).toList())).toList();

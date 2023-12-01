@@ -2,13 +2,15 @@ package it.dedagroup.venditabiglietti.principal.controller;
 
 import static it.dedagroup.venditabiglietti.principal.util.UtilPath.ADMIN_PATH;
 import static it.dedagroup.venditabiglietti.principal.util.UtilPath.AGGIUNGI_CATEGORIA;
+import static it.dedagroup.venditabiglietti.principal.util.UtilPath.AGGIUNGI_LUOGO;
 import static it.dedagroup.venditabiglietti.principal.util.UtilPath.AGGIUNGI_SETTORE;
 import static it.dedagroup.venditabiglietti.principal.util.UtilPath.AGGIUNGI_UTENTE_VENDITORE;
-import static it.dedagroup.venditabiglietti.principal.util.UtilPath.ELIMINA_UTENTE_CLIENTE;
-import static it.dedagroup.venditabiglietti.principal.util.UtilPath.ELIMINA_UTENTE_VENDITORE;
-import static it.dedagroup.venditabiglietti.principal.util.UtilPath.ELIMINA_MANIFESTAZIONE;
 import static it.dedagroup.venditabiglietti.principal.util.UtilPath.ELIMINA_EVENTO;
 import static it.dedagroup.venditabiglietti.principal.util.UtilPath.ELIMINA_LUOGO;
+import static it.dedagroup.venditabiglietti.principal.util.UtilPath.ELIMINA_MANIFESTAZIONE;
+import static it.dedagroup.venditabiglietti.principal.util.UtilPath.ELIMINA_UTENTE_CLIENTE;
+import static it.dedagroup.venditabiglietti.principal.util.UtilPath.ELIMINA_UTENTE_VENDITORE;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -32,6 +34,7 @@ import it.dedagroup.venditabiglietti.principal.dto.request.AggiungiSettoreDtoReq
 import it.dedagroup.venditabiglietti.principal.dto.request.AggiungiUtenteDTORequest;
 import it.dedagroup.venditabiglietti.principal.exception.response.ErrorMessageDTOResponse;
 import it.dedagroup.venditabiglietti.principal.facade.AdminFacade;
+import it.dedagroup.venditabiglietti.principal.model.Luogo;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 
@@ -40,6 +43,7 @@ import jakarta.validation.constraints.Min;
 @Validated
 @Tag(name = "Controller che gestisce l'utenza ADMIN", description = "Tutti i metodi che sono implementati in questo controller gestiscono l'utenza admin e come interagisce sul sito")
 public class AdminController {
+	
 
 	@Autowired
 	AdminFacade facade;
@@ -105,7 +109,6 @@ public class AdminController {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "202", description = "Il settore è stato aggiunto con successo"),
 			@ApiResponse(responseCode = "400", description = "La richiesta del client non è valida. Assicurarsi che i dati di input siano corretti.", content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ErrorMessageDTOResponse.class))) })
-
 	@PostMapping(AGGIUNGI_SETTORE)
 	public ResponseEntity<Void> aggiungiSettore(@Valid @RequestBody AggiungiSettoreDtoRequest request) {
 		facade.aggiungiSettore(request);
@@ -140,6 +143,12 @@ public class AdminController {
 	@PostMapping(ELIMINA_LUOGO + "/{id}")
 	public ResponseEntity<Void> eliminaLuogo(@PathVariable long id) {
 		facade.eliminaLuogo(id);
+		return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+	}
+	
+	@PostMapping(AGGIUNGI_LUOGO)
+	public ResponseEntity<Void> aggiungiLuogo(@RequestBody Luogo request) {
+		facade.aggiungiLuogo(request);;
 		return ResponseEntity.status(HttpStatus.ACCEPTED).build();
 	}
 
