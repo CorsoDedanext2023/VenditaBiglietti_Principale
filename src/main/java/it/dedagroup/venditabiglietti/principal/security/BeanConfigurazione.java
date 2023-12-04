@@ -1,6 +1,4 @@
 package it.dedagroup.venditabiglietti.principal.security;
-
-import it.dedagroup.venditabiglietti.principal.repository.UtenteRepository;
 import it.dedagroup.venditabiglietti.principal.service.UtenteServiceDef;
 
 import org.springframework.beans.factory.annotation.Autowired;

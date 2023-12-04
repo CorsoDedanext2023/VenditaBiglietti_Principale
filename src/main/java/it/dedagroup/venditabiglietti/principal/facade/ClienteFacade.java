@@ -51,7 +51,7 @@ public class ClienteFacade {
          if (nuovoTelefono != null && !nuovoTelefono.isEmpty()) {
         	 utenteDaMod.setTelefono(nuovoTelefono);
          }
-    	service.modificaUtente(utenteDaMod);
+    	service.modificaUtente(utenteDaMod, utenteDaMod.getId());
     }
 
     public BigliettoMicroDTO acquistaBiglietto(Long idPrezzoSettoreEvento, long idUtente) {
