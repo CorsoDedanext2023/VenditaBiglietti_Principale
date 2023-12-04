@@ -16,7 +16,7 @@ public interface UtenteServiceDef {
 	Utente findByNomeAndCognome(String nome, String cognome);
 	Utente findByRuolo(Ruolo ruolo);
 	void aggiungiUtente(Utente utente);
-	Utente modificaUtente(Utente utente);
+	Utente modificaUtente(Utente utente, long idUtente);
 	Utente eliminaUtente(long id);
 	Utente findByEmail(String email);
 	Utente findById(long id);
