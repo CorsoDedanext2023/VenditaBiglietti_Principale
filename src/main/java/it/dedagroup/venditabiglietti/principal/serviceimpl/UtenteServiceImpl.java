@@ -13,7 +13,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import it.dedagroup.venditabiglietti.principal.model.Ruolo;
 import it.dedagroup.venditabiglietti.principal.model.Utente;
-import it.dedagroup.venditabiglietti.principal.repository.UtenteRepository;
 import it.dedagroup.venditabiglietti.principal.service.UtenteServiceDef;
 import jakarta.transaction.Transactional;
 
@@ -23,31 +22,26 @@ public class UtenteServiceImpl implements UtenteServiceDef, GeneralCallService {
 
 	private final String pathUtente="http://localhost:8092/utente";
 
-	@Autowired
-	private UtenteRepository utenteRepository;
-
 	//TODO pulire i metodi togliendo le duplicazioni
-
-
 
 	@Override
 	public Utente findByEmailAndPassword(String email, String password) {
-		return callPost(pathUtente + "/trovaPerEmailEPassword", null, Utente.class);
+		return callPost(pathUtente + "/trovaPerEmailEPassword/" + email + "/" + password, null, Utente.class);
 	}
 
 	@Override
 	public Utente findByTelefono(String telefono) {
-		return callPost(pathUtente + "/trovaPerTelefono", null, Utente.class);
+		return callPost(pathUtente + "/trovaPerTelefono" + "?telefono=" + telefono, null, Utente.class);
 	}
 
 	@Override
-	public Utente findByData_Di_Nascita(LocalDate data_di_nascita) {
-		return callPost(pathUtente + "/trovaPerDataDiNascita", null, Utente.class);
+	public Utente findByData_Di_Nascita(LocalDate dataDiNascita) {
+		return callPost(pathUtente + "/trovaPerDataDiNascita" + "?dataDiNascita=" + dataDiNascita, null, Utente.class);
 	}
 
 	@Override
 	public Utente findByNomeAndCognome(String nome, String cognome) {
-		return callPost(pathUtente + "/trovaPerNomeECognome", null, Utente.class);
+		return callPost(pathUtente + "/trovaPerNomeECognome" + "?nome=" + nome + "&cognome=" + cognome, null, Utente.class);
 	}
 
 	@Override
@@ -63,16 +57,14 @@ public class UtenteServiceImpl implements UtenteServiceDef, GeneralCallService {
 
 	@Override
 	@Transactional(rollbackOn = DataAccessException.class)
-	public Utente modificaUtente(Utente utente) {
-		return callPost(pathUtente + "/modificaUtente", utente, Utente.class);
+	public Utente modificaUtente(Utente utente, long idUtente) {
+		return callPost(pathUtente + "/modificaUtente/" + idUtente, utente, Utente.class);
 	}
 
 	@Override
 	@Transactional(rollbackOn = DataAccessException.class)
 	public Utente eliminaUtente(long id) {
-		Utente u = callPost(pathUtente + "/trovaPerId/" + id, id, Utente.class);
-		u.setCancellato(true);
-		return callPost(pathUtente + "/modificaUtente", u, Utente.class);
+		return callPost(pathUtente + "/eliminaUtente/" + id, null, Utente.class);
 	}
 
 	@Override
@@ -92,7 +84,7 @@ public class UtenteServiceImpl implements UtenteServiceDef, GeneralCallService {
 			throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE,"l'utente ha ruolo " + u.getRuolo() + ", impossibile disattivare ruolo ADMIN");
 		} else {
 			u.setRuolo(Ruolo.CLIENTE);
-			modificaUtente(u);
+			eliminaUtente(id);
 		}
 		return u.getEmail();
 	}

@@ -3,6 +3,8 @@ package it.dedagroup.venditabiglietti.principal.controller;
 import static it.dedagroup.venditabiglietti.principal.util.UtilPath.EVENTI_FUTURI_CON_BIGLIETTI;
 import static it.dedagroup.venditabiglietti.principal.util.UtilPath.LOGIN;
 import static it.dedagroup.venditabiglietti.principal.util.UtilPath.REGISTRAZIONE;
+
+import java.time.LocalDate;
 import java.util.List;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -10,12 +12,14 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import it.dedagroup.venditabiglietti.principal.dto.response.MostraEventiFuturiDTOResponse;
 import it.dedagroup.venditabiglietti.principal.dto.request.EventiFiltratiDTORequest;
 import it.dedagroup.venditabiglietti.principal.dto.response.EventiFiltratiDTOResponse;
 import it.dedagroup.venditabiglietti.principal.exception.response.BadRequestDTOResponse;
 import it.dedagroup.venditabiglietti.principal.exception.response.ErrorMessageDTOResponse;
 import it.dedagroup.venditabiglietti.principal.exception.response.ErrorMessageListDTOResponse;
+import it.dedagroup.venditabiglietti.principal.model.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -32,6 +36,8 @@ import static it.dedagroup.venditabiglietti.principal.util.UtilPath.*;
 
 @RestController
 @RequestMapping(GENERAL_PATH)
+@Tag(name = "Controller contenente gli endpoint raggiungibili anche senza registrarsi e/o loggarsi.", description = "In questo controller sono presenti gli endpoint per registrazione," +
+        "login, ricerca di eventi con ancora biglietti tramite una serie di filtri selezionabili, e la ricerca di eventi, con ancora biglietti disponibili, con data successiva a quella di invio della richiesta.")
 public class GeneralController {
 
     @Autowired

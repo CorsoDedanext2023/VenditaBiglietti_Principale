@@ -7,7 +7,6 @@ import it.dedagroup.venditabiglietti.principal.facade.ClienteFacade;
 import it.dedagroup.venditabiglietti.principal.model.Biglietto;
 import it.dedagroup.venditabiglietti.principal.model.PrezzoSettoreEvento;
 import it.dedagroup.venditabiglietti.principal.model.Utente;
-import it.dedagroup.venditabiglietti.principal.repository.UtenteRepository;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
